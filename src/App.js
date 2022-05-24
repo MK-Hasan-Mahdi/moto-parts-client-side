@@ -9,11 +9,11 @@ import Signup from './Pages/Login/Signup';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './Pages/Login/PrivateRoute';
 import Dashboard from './Pages/Dashboard/Dashboard';
-import MyOrders from './Pages/Dashboard/MyOrders';
 import AddReview from './Pages/Dashboard/AddReview';
-import MyProfile from './Pages/Dashboard/MyProfile';
 import NotFound from './Pages/Shared/NotFound';
 import Footer from './Pages/Shared/Footer';
+import MyProfile from './Pages/Dashboard/MyProfile';
+import MyOrders from './Pages/Dashboard/MyOrders';
 
 function App() {
   return (
@@ -32,9 +32,10 @@ function App() {
             <Dashboard></Dashboard>
           </PrivateRoute>
         }>
-          <Route index element={<MyOrders />}></Route>
+          <Route index element={<MyProfile />}></Route>
+          <Route path='myorder' element={<MyOrders />}></Route>
           <Route path='addreview' element={<AddReview />}></Route>
-          <Route path='myprofile' element={<MyProfile />}></Route>
+
         </Route>
         <Route path="/login" element={<Login></Login>} />
         <Route path="/signup" element={<Signup></Signup>} />

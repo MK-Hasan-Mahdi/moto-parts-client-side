@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import PurchaseForm from './PurchaseForm';
+import swal from 'sweetalert';
 import { useForm } from 'react-hook-form';
 
 const ProductPurchase = () => {
@@ -66,13 +67,15 @@ const ProductPurchase = () => {
 
     const handlePurchaseForm = data => {
         const name = user?.displayName;
+        const productName = product.name;
         const userInput = {
             name,
             email: user?.email,
             number: data?.number,
             address: data?.address,
             quantity: quantity,
-            price: quantity * price
+            price: quantity * price,
+            product: productName
         }
         setuserInputData(userInput)
 
@@ -95,7 +98,13 @@ const ProductPurchase = () => {
                 .then(data => {
                     console.log(data)
                 })
-
+            // alert msg
+            swal({
+                title: "Congratulation!",
+                text: "Purchase Complete",
+                icon: "success",
+                button: "OK",
+            });
 
 
         }

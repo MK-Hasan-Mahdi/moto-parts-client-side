@@ -1,22 +1,90 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import swal from 'sweetalert';
 
 const MyOrders = () => {
-    const [order, setOrder] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [user] = useAuthState(auth);
 
     useEffect(() => {
+        // const email = user.email;
         if (user) {
             fetch(`http://localhost:5000/order?email=${user.email}`)
                 .then(res => res.json())
-                .then(data => setOrder(data));
+                .then(data => setOrders(data));
         }
-    }, [user])
+    }, [user]);
+
+    // handle delete user purchase order
+    const handleDeleteOrder = (id) => {
+        // const proceedDelete = window.confirm('Confirm delete');
+        const proceedDelete = swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((id) => {
+                if (id) {
+                    swal("Your order has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your order not cancelled!");
+                }
+            });
+
+        // swal("Are you sure?", { dangerMode: true, buttons: true, });
+
+
+        if (proceedDelete) {
+            const url = `http://localhost:5000/order/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    const remainingOrder = orders.filter(order => order._id !== id)
+                    setOrders(remainingOrder);
+                })
+        }
+    }
 
     return (
         <div>
-            <h2>My orders: {order.length} </h2>
+            <h2 className='text-center text-3xl p-2'>My Purchase Order: {orders.length} </h2>
+            <div className="overflow-x-auto">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            orders.map((order) =>
+                                <tr className='hover' key={order._id}>
+                                    {/* <th>{index + 1}</th> */}
+                                    <th>{order.name}</th>
+                                    <td>{order.email}</td>
+                                    <td>{order.product}</td>
+                                    <td>{order.quantity}</td>
+                                    <td>{order.price}</td>
+                                    <td><button onClick={() => handleDeleteOrder(order._id)} class="btn btn-sm btn-outline btn-error"><span>Cancel Order</span></button></td>
+                                </tr>)
+                        }
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

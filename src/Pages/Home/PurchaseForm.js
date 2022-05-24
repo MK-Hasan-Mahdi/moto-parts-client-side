@@ -10,7 +10,7 @@ const PurchaseForm = ({ handlePurchaseForm, product, quantity }) => {
     const [user] = useAuthState(auth);
     return (
         <div className='w-full mx-auto custom-shadow bg-accent pt-10 pb-10 px-10 rounded-lg'>
-            <h1 className='text-2xl md:text-3xl font-medium text-slate-500 text-center mb-10'>Client Information</h1>
+            <h1 className='text-2xl md:text-3xl font-medium text-slate-500 text-center mb-10'>Purchase Information</h1>
             <form onSubmit={handleSubmit(handlePurchaseForm)}>
 
                 <div className="">
