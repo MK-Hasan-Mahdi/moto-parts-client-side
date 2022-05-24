@@ -1,13 +1,17 @@
 import React from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Loading from '../Shared/Loading';
 
 const Signup = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     const [
         createUserWithEmailAndPassword,
@@ -15,6 +19,8 @@ const Signup = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [token] = useToken(user || googleUser);
 
 
     if (loading || googleLoading) {
@@ -26,11 +32,12 @@ const Signup = () => {
         erroMsg = <p className='text-red-500'><small>Errorrr: {error?.message || googleError?.message}</small></p>
     }
 
-    if (user || googleUser) {
+    if (token) {
         console.log(user || googleUser);
+        // navigate(from, { replace: true });
     }
     const onSubmit = async data => {
-        console.log(data)
+        // console.log(data)
         await createUserWithEmailAndPassword(data.email, data.password);
     };
 
