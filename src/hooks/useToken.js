@@ -16,14 +16,14 @@ const useToken = (user) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('user from useToken', data);
+                    // console.log('user from useToken', data);
                     const accessToken = data.token;
                     localStorage.setItem('accessToken', accessToken);
                     setToken(accessToken);
                 })
         }
-    }, [user]);
+    }, [user])
 
-    return (token)
+    return [token, setToken]
 }
 export default useToken;
