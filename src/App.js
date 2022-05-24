@@ -14,6 +14,7 @@ import NotFound from './Pages/Shared/NotFound';
 import Footer from './Pages/Shared/Footer';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import MyOrders from './Pages/Dashboard/MyOrders';
+import Users from './Pages/Dashboard/Users';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route index element={<MyProfile />}></Route>
           <Route path='myorder' element={<MyOrders />}></Route>
           <Route path='addreview' element={<AddReview />}></Route>
+          <Route path='users' element={<Users />}></Route>
 
         </Route>
         <Route path="/login" element={<Login></Login>} />
