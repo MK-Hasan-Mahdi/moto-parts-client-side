@@ -13,10 +13,11 @@ import MyOrders from './Pages/Dashboard/MyOrders';
 import AddReview from './Pages/Dashboard/AddReview';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import NotFound from './Pages/Shared/NotFound';
+import Footer from './Pages/Shared/Footer';
 
 function App() {
   return (
-    <div className='container mx-auto'>
+    <div className='mx-auto'>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>} />
@@ -39,6 +40,7 @@ function App() {
         <Route path="/signup" element={<Signup></Signup>} />
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
+      <Footer></Footer>
       <ToastContainer></ToastContainer>
     </div>
   );

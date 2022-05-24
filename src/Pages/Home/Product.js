@@ -10,9 +10,9 @@ const Product = ({ product }) => {
     }
 
     return (
-        <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card bg-base-100 shadow-xl">
             <figure class="">
-                <img src={img} alt="Shoes" class="rounded-xl" />
+                <img className='' src={img} alt="Shoes" class="rounded-xl" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">{name}</h2>
