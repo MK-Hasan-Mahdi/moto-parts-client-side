@@ -33,8 +33,8 @@ const Signup = () => {
     }
 
     if (token) {
-        console.log(user || googleUser);
-        // navigate(from, { replace: true });
+        // console.log(user || googleUser);
+        navigate(from, { replace: true });
     }
     const onSubmit = async data => {
         // console.log(data)

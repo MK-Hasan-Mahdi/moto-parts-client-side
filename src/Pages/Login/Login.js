@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -16,6 +17,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+    const [token] = useToken(user || googleUser);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,13 +31,13 @@ const Login = () => {
     if (error || googleError) {
         erroMsg = <p className='text-red-500'>Errorrr: {error?.message || googleError?.message} </p>
     }
-    if (user || googleUser) {
-        console.log(user || googleUser);
+    if (token) {
+        // console.log(user || googleUser);
         navigate(from, { replace: true });
     }
 
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
         signInWithEmailAndPassword(data.email, data.password)
     };
 
