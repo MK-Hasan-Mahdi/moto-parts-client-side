@@ -8,6 +8,7 @@ import auth from '../../firebase.init';
 const PurchaseForm = ({ handlePurchaseForm, product, quantity }) => {
     const { register, handleSubmit, formState: { errors }, trigger, reset } = useForm();
     const [user] = useAuthState(auth);
+    console.log(user);
     return (
         <div className='w-full mx-auto custom-shadow bg-accent pt-10 pb-10 px-10 rounded-lg'>
             <h1 className='text-2xl md:text-3xl font-medium text-slate-500 text-center mb-10'>Purchase Information</h1>

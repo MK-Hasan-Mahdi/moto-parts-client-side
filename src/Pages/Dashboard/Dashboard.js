@@ -23,12 +23,21 @@ const Dashboard = () => {
                     <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
 
                         <li><Link to='/dashboard'>My Profile</Link></li>
-                        <li><Link to='/dashboard/addreview'>Add Review</Link></li>
-                        <li><Link to='/dashboard/myorder'>My Orders</Link></li>
+                        {/* <li><Link to='/dashboard/addreview'>Add Review</Link></li> */}
+                        {/* <li><Link to='/dashboard/myorder'>My Orders</Link></li> */}
 
-                        {admin &&
+                        {admin ?
                             <>
                                 <li><Link to='/dashboard/users'>All Users</Link></li>
+                                <li><Link to='/dashboard/addproduct'>Add Product</Link></li>
+                                <li><Link to='/dashboard/manageproducts'>Manage Products</Link></li>
+                                <li><Link to='/dashboard/manageorders'>Manage All Orders</Link></li>
+
+                            </>
+                            :
+                            <>
+                                <li><Link to='/dashboard/addreview'>Add Review</Link></li>
+                                <li><Link to='/dashboard/myorder'>My Orders</Link></li>
 
                             </>
                         }

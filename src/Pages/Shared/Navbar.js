@@ -13,13 +13,14 @@ const Navbar = () => {
     };
 
     const menuItems = <>
-        <li className='text-xl'><Link to='/'>Home</Link></li>
-        <li className='text-xl'><Link to='/about'>About</Link></li>
+        <li className=''><Link to='/'>Home</Link></li>
+        <li className=''><Link to='/about'>About</Link></li>
+        <li className=''><Link to='/myportfolio'>My Portfolio</Link></li>
 
         {
-            user && <li className='text-xl'><Link to='/dashboard'>Dashboard</Link></li>
+            user && <li className=''><Link to='/dashboard'>Dashboard</Link></li>
         }
-        <li className='text-xl'>
+        <li className=''>
             {
                 user ? <button className='btn-ghost' onClick={logout}>Sign Out</button>
                     :
@@ -29,7 +30,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div class="navbar bg-base-100 sticky top-0 z-50">
+        <div class="navbar bg-base-100 sticky top-0 z-50 shadow-lg">
             <div class="navbar-start">
                 <div class="dropdown">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">

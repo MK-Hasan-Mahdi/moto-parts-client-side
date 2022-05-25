@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -19,26 +19,28 @@ const Signup = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateProError] = useUpdateProfile(auth);
 
     const [token] = useToken(user || googleUser);
 
 
-    if (loading || googleLoading) {
+    if (loading || googleLoading || updating) {
         return <Loading></Loading>
     }
 
     let erroMsg;
-    if (error || googleError) {
+    if (error || googleError || updateProError) {
         erroMsg = <p className='text-red-500'><small>Errorrr: {error?.message || googleError?.message}</small></p>
     }
 
     if (token) {
-        // console.log(user || googleUser);
+        console.log(user || googleUser);
         navigate(from, { replace: true });
     }
     const onSubmit = async data => {
         // console.log(data)
         await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
     };
 
 
@@ -57,7 +59,7 @@ const Signup = () => {
                                 {...register("name", {
                                     required: {
                                         value: true,
-                                        message: "Nameee is Required"
+                                        message: "Name is Required"
                                     },
                                 })}
                             />
@@ -73,7 +75,7 @@ const Signup = () => {
                                 {...register("email", {
                                     required: {
                                         value: true,
-                                        message: "Emmailll is Required"
+                                        message: "Email is Required"
                                     },
                                     pattern: {
                                         value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
@@ -94,7 +96,7 @@ const Signup = () => {
                             <input {...register("password", {
                                 required: {
                                     value: true,
-                                    message: "Passworddd is Required"
+                                    message: "Password is Required"
                                 },
                                 minLength: {
                                     value: 6,
