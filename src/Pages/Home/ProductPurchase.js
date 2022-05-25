@@ -138,7 +138,7 @@ const ProductPurchase = () => {
                 <p>Available Qty: {availableQty}</p>
                 <p>Min Order Qty: {minOrderQty}</p>
                 <form onSubmit={handleQuantity}>
-                    <input type="number" placeholder="Quantity" name='quantity' className="input input-bordered input-secondary w-full max-w-xs"
+                    <input type="number" placeholder="Minimum Quantity 10" name='quantity' className="input input-bordered input-secondary w-full max-w-xs"
                         required=""
                     />
                     <button type='submit' className=" btn btn-primary ml-2"> Purchase</button>

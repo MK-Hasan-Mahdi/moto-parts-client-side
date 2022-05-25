@@ -4,6 +4,10 @@ import { toast } from 'react-toastify';
 const User = ({ user, refetch }) => {
     const { email, role } = user;
 
+    const alreadyAdmin = () => {
+        toast.error('I am already Admin')
+    }
+
     const makeAdmin = () => {
         fetch(`http://localhost:5000/user/admin/${email}`, {
             method: 'PUT',
@@ -30,7 +34,7 @@ const User = ({ user, refetch }) => {
         <tr className='hover'>
             <th>{email}</th>
             <td></td>
-            <td>{role !== 'admin' ? <button onClick={makeAdmin} class="btn btn-xs">Make Admin</button> : <butoon className='btn btn-xs  btn-success'>Admin</butoon>}</td>
+            <td>{role !== 'admin' ? <button onClick={makeAdmin} class="btn btn-xs">Make Admin</button> : <butoon onClick={alreadyAdmin} className='btn btn-xs  btn-success'>Admin</butoon>}</td>
             <td><button class="btn btn-xs">Remove User</button></td>
         </tr>
     );
