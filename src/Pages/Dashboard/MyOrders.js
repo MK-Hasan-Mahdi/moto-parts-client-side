@@ -69,6 +69,11 @@ const MyOrders = () => {
         }
     }
 
+    // payment for order
+    const handlePaymentOrder = () => {
+        console.log('give payment');
+    }
+
     return (
         <div>
             <h2 className='text-center text-3xl p-2'>My Purchase Order: {orders.length} </h2>
@@ -82,6 +87,7 @@ const MyOrders = () => {
                             <th>Qty</th>
                             <th>Price</th>
                             <th>Action</th>
+                            <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,6 +101,7 @@ const MyOrders = () => {
                                     <td>{order.quantity}</td>
                                     <td>{order.price}</td>
                                     <td><button onClick={() => handleDeleteOrder(order._id)} class="btn btn-sm btn-outline btn-error"><span>Cancel Order</span></button></td>
+                                    <td><button onClick={() => handlePaymentOrder(order._id)} class="btn btn-sm btn-outline"><span>Payment</span></button></td>
                                 </tr>)
                         }
 

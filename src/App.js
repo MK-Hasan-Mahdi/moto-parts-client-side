@@ -7,6 +7,7 @@ import ProductPurchase from './Pages/Home/ProductPurchase';
 import Login from './Pages/Login/Login';
 import Signup from './Pages/Login/Signup';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './Pages/Login/PrivateRoute';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import AddReview from './Pages/Dashboard/AddReview';
