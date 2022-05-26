@@ -10,18 +10,18 @@ const Product = ({ product }) => {
     }
 
     return (
-        <div class="card bg-base-100 shadow-xl">
-            <figure class="">
-                <img className='' src={img} alt="Shoes" class="rounded-xl" />
+        <div className="card bg-stone-200 shadow-xl">
+            <figure className="px-4 py-6 rounded-lg transform transition duration-500 hover:scale-110">
+                <img classNameName='' src={img} alt="Shoes" className="rounded-xl" />
             </figure>
-            <div class="card-body">
-                <h2 class="card-title">{name}</h2>
+            <div className="card-body">
+                <h2 className="card-title">{name}</h2>
                 <p>{description}</p>
                 <p>Price: {price}</p>
                 <p>Minimum Order Quantity: {minOrderQty}</p>
                 <p>Available Quantity: {availableQty}</p>
-                <div class="card-actions">
-                    <button onClick={() => navigateToPurchase(_id)} class="btn btn-primary text-center">Purchase</button>
+                <div className="card-actions">
+                    <button onClick={() => navigateToPurchase(_id)} className="btn btn-primary text-center">Purchase</button>
                 </div>
             </div>
         </div>

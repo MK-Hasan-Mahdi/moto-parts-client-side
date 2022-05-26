@@ -1,83 +1,100 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
 import auth from '../../firebase.init';
 
 const MyProfile = () => {
-    const { register, handleSubmit, formState: { errors }, trigger, reset } = useForm();
     const [user] = useAuthState(auth);
+    const [profile, setProfile] = useState({})
+
+    useEffect(() => {
+
+        if (user) {
+            fetch(`http://localhost:5000/profile?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => setProfile(data))
+
+        }
+    }, [user])
+
+    const handleProfileForm = event => {
+        // const name = user?.displayName;
+
+        event.preventDefault();
+
+        const name = user?.displayName;
+        const email = user?.email;
+        const phone = event.target.phone.value;
+        const address = event.target.address.value;
+        const link = event.target.link.value;
+        // console.log(name, email, phone, address, link);
+
+
+        const userInput = {
+            name,
+            email,
+            address: address,
+            phone: phone,
+            link: link,
+        }
+
+        //post profile to database
+        fetch('http://localhost:5000/profile', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userInput)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+
+    }
+
 
 
     return (
-        <div className='w-full mx-auto custom-shadow bg-accent pt-10 pb-10 px-10 rounded-lg'>
+        <div className='w-full mx-auto custom-shadow bg-base-100 pt-10 pb-10 px-10 rounded-lg'>
             <h1 className='text-2xl md:text-3xl font-medium text-slate-500 text-center mb-10'>My Profile</h1>
-            <form onSubmit={handleSubmit()}>
+            <form onSubmit={handleProfileForm} className='grid grid-cols-1 gap-3 justify-items-center mt-3 '>
 
-                <div className="">
-                    <div className="relative z-0 mb-6 w-full group">
-                        <input type="text" name="floating_first_name" id="floating_first_name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "
-                            value={user?.displayName}
-                        />
-
-
-                        <label htmlFor="floating_first_name" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Name</label>
-                    </div>
-
-
-                </div>
-                <div className="relative z-0 mb-6 w-full group">
-                    <input type="email" name="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required=""
-                        value={user?.email} disabled
-                    />
-
-                    <label htmlFor="floating_email" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                    <div className="relative z-0 mb-6 w-full group">
-                        <input type="number" name="floating_quantity" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" disabled
-                        />
-
-                        <label htmlFor="floating_email" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Quantity</label>
-                    </div>
-                    <div className="relative z-0 mb-6 w-full group">
-                        <input type="number" name="floating_total" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" disabled
-                        />
-
-                        <label htmlFor="floating_email" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Total Price</label>
-                    </div>
-                </div>
-                <div className="relative z-0 mb-6 w-full group">
-                    <input type="text" name="floating_address" id="floating_address" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required=""
-                        {...register('address', {
-                            required: 'Address is required',
-                            minLength: {
-                                value: 6, message: 'Please give full address'
-                            }
-                        })}
-                        onKeyUp={() => {
-                            trigger('address')
-                        }}
-                    />
-                    <p className='text-red-500 text-sm'>{errors?.address?.message}</p>
-
-                    <label htmlFor="floating_address" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address</label>
-                </div>
-                <div className="relative z-0 mb-6 w-full group">
-                    <input type="number" name="floating_phone" id="floating_phone" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required=""
-                        {...register('number', {
-                            required: 'Number is required',
-
-                        })}
-                        onKeyUp={() => {
-                            trigger('number')
-                        }}
-                    />
-                    <p className='text-red-500 text-sm'>{errors?.number?.message}</p>
-
-                    <label htmlFor="floating_repeat_password" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contact Number</label>
-                </div>
-                <input className='btn btn-primary px-5 py-[10px] rounded-md ml-2 cursor-pointer' type="submit" value="Purchase Complete" />
+                <input type="text" name='name' value={user?.displayName || ""} className="input input-bordered w-full max-w-xs" />
+                <input type="email" name='email' disabled value={user?.email || ""} className="input input-bordered w-full max-w-xs" />
+                <input type="text" name='phone' placeholder="Phone" className="input input-bordered w-full max-w-xs" />
+                <input type="text" name='address' placeholder="Address" className="input input-bordered w-full max-w-xs" />
+                <input type="text" name='link' placeholder="Link" className="input input-bordered w-full max-w-xs" />
+                <input type="submit" placeholder="Submit" className="btn btn-primary w-full max-w-xs" />
             </form>
+
+            <div className="overflow-x-auto">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            profile.map((p) =>
+                                <tr className='hover' key={p._id}>
+
+                                    <th>{p.name}</th>
+                                    <th>{p.email}</th>
+                                    <th>{p.address}</th>
+                                    <th>{p.phone}</th>
+                                    <th>{p.link}</th>
+
+                                </tr>)
+                        }
+
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     );
