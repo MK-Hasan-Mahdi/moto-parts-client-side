@@ -6,15 +6,15 @@ const MyProfile = () => {
     const [user] = useAuthState(auth);
     const [profile, setProfile] = useState({})
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (user) {
-            fetch(`http://localhost:5000/profile?email=${user.email}`)
-                .then(res => res.json())
-                .then(data => setProfile(data))
+    //     if (user) {
+    //         fetch(`http://localhost:5000/profile?email=${user.email}`)
+    //             .then(res => res.json())
+    //             .then(data => setProfile(data))
 
-        }
-    }, [user])
+    //     }
+    // }, [user])
 
     const handleProfileForm = event => {
         // const name = user?.displayName;
@@ -29,26 +29,26 @@ const MyProfile = () => {
         // console.log(name, email, phone, address, link);
 
 
-        const userInput = {
-            name,
-            email,
-            address: address,
-            phone: phone,
-            link: link,
-        }
+        // const userInput = {
+        //     name,
+        //     email,
+        //     address: address,
+        //     phone: phone,
+        //     link: link,
+        // }
 
-        //post profile to database
-        fetch('http://localhost:5000/profile', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(userInput)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
+        // //post profile to database
+        // fetch('http://localhost:5000/profile', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(userInput)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data)
+        //     })
 
     }
 
@@ -79,7 +79,7 @@ const MyProfile = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {/* {
                             profile.map((p) =>
                                 <tr className='hover' key={p._id}>
 
@@ -90,7 +90,7 @@ const MyProfile = () => {
                                     <th>{p.link}</th>
 
                                 </tr>)
-                        }
+                        } */}
 
                     </tbody>
                 </table>

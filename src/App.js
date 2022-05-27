@@ -21,6 +21,8 @@ import AddProduct from './Pages/Dashboard/AddProduct';
 import ManageProducts from './Pages/Dashboard/ManageProducts';
 import ManageOrders from './Pages/Dashboard/ManageOrders';
 import MyPortfolio from './Pages/MyPortfolio/MyPortfolio';
+import Blogs from './Pages/Blogs/Blogs';
+import DashboardFirst from './Pages/Dashboard/DashboardFirst';
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>} />
         <Route path="/about" element={<About></About>} />
+        <Route path="/blogs" element={<Blogs></Blogs>} />
         <Route path="/myportfolio" element={<MyPortfolio></MyPortfolio>} />
         <Route path='/product/:productId' element={
           <RequireAuth>
@@ -40,6 +43,7 @@ function App() {
             <Dashboard></Dashboard>
           </RequireAuth>
         }>
+          <Route index element={<DashboardFirst />}></Route>
           <Route path='myprofile' element={<MyProfile />}></Route>
           <Route path='myorder' element={<MyOrders />}></Route>
           <Route path='addreview' element={<AddReview />}></Route>
