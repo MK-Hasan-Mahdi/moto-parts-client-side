@@ -16,7 +16,7 @@ const AddProduct = () => {
         console.log(newProducts);
 
         // upload a product
-        const url = `http://localhost:5000/product`;
+        const url = `https://peaceful-dusk-44249.herokuapp.com/product`;
         fetch(url, {
             method: "POST",
             headers: {

@@ -16,7 +16,7 @@ const AddReview = () => {
             review: event.target.review.value,
             star: event.target.star.value,
         };
-        const url = "http://localhost:5000/reviews";
+        const url = "https://peaceful-dusk-44249.herokuapp.com/reviews";
         fetch(url, {
             method: "POST",
             headers: {

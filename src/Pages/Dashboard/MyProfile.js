@@ -21,7 +21,7 @@ const MyProfile = () => {
             link: event.target.link.value,
         };
 
-        const url = `http://localhost:5000/update/${email}`;
+        const url = `https://peaceful-dusk-44249.herokuapp.com/update/${email}`;
         fetch(url, {
             method: "PUT",
             headers: {
@@ -38,7 +38,7 @@ const MyProfile = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/users`, {
+            .get(`https://peaceful-dusk-44249.herokuapp.com/users`, {
                 headers: {
                     // authorization: `Bearer ${localStorage.getItem("accesToken")}`,
                 },

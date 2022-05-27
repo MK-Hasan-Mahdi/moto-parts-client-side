@@ -19,7 +19,7 @@ const ProductPurchase = () => {
     const [userInputData, setuserInputData] = useState({});
 
     useEffect(() => {
-        const url = `http://localhost:5000/product/${productId}`;
+        const url = `https://peaceful-dusk-44249.herokuapp.com/product/${productId}`;
         console.log(url);
         fetch(url)
             .then(res => res.json())
@@ -51,7 +51,7 @@ const ProductPurchase = () => {
             img: img
         };
         setProduct(newProduct);
-        const url = `http://localhost:5000/product/${productId}`
+        const url = `https://peaceful-dusk-44249.herokuapp.com/product/${productId}`
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -88,7 +88,7 @@ const ProductPurchase = () => {
             const newQuantityObj = { newQuantity }
 
             //post order to database
-            fetch('http://localhost:5000/order', {
+            fetch('https://peaceful-dusk-44249.herokuapp.com/order', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

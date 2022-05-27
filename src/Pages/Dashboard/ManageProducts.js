@@ -7,7 +7,7 @@ const ManageProducts = () => {
     const handleDeleteItem = (id) => {
         const proceedDelete = window.confirm('confirm delete?');
         if (proceedDelete) {
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://peaceful-dusk-44249.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
