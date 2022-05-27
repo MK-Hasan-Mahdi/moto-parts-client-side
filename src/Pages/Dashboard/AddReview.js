@@ -1,55 +1,90 @@
-import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import auth from '../../firebase.init';
+import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const AddReview = () => {
-    const [user] = useAuthState(auth);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const onSubmitReview = data => {
-        const userReview = {
-            review: data.review,
-            ratings: data.ratings,
-            user,
-        }
-        fetch('http://localhost:5000/reviews', {
-            method: 'POST',
+    const [user, loading, errorHook] = useAuthState(auth);
+    const navigate = useNavigate();
+
+    const HandleReview = (event) => {
+        event.preventDefault();
+        const Review = {
+            email: user.email,
+            title: event.target.title.value,
+            review: event.target.review.value,
+            star: event.target.star.value,
+        };
+        const url = "http://localhost:5000/reviews";
+        fetch(url, {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "content-type": "application/json",
             },
-            body: JSON.stringify(userReview)
+            body: JSON.stringify(Review),
         })
-            .then(res => res.json())
-            .then(res => {
-                toast.success('Thanks for Review')
-                reset()
-            }
-            );
-
-    }
-
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                toast.success("Review Added succsessfully");
+                navigate("/dashboard");
+            })
+            .catch((error) => {
+                toast.error(error);
+            });
+    };
     return (
-        <div className='text-center mt-10 md:mt-0'>
-            <h2>Add a Review</h2>
-            <form onSubmit={handleSubmit(onSubmitReview)}>
-                <textarea className="textarea textarea-bordered w-4/5 md:w-1/2" placeholder="Your Review"
-                    {...register("review", { required: true })}
-                ></textarea>
+        <div class="hero ">
+            <div class="hero-content flex-col lg:flex-row-reverse">
+                <div class="card flex-shrink-0 w-full shadow-2xl bg-base-100">
+                    <div class="card-body">
+                        <form action="" onSubmit={HandleReview}>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Title</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="title"
+                                    class="input input-bordered"
+                                    name="title"
+                                />
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Review</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Your Review"
+                                    class="input input-bordered"
+                                    name="review"
+                                />
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Stars</span>
+                                </label>
+                                <select
+                                    name="star"
+                                    class="select select-bordered w-full max-w-xs"
+                                >
+                                    <option selected>1 Star</option>
+                                    <option>2 Star</option>
+                                    <option>3 Star</option>
+                                    <option>4 Star</option>
+                                    <option>5 Star</option>
+                                </select>
+                            </div>
 
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Ratings</span>
-                    </label>
-                    <input type="text" placeholder="rating marks" className="input input-bordered w-full max-w-xs"
-                        {...register("ratings",)}
-                    />
+                            <div class="form-control mt-6">
+                                <input type="submit" className="btn" value="submit" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div className='text-center'>
-                    <input type="submit" className='btn btn-primary mx-auto w-32 ' />
-                </div>
-            </form>
+            </div>
         </div>
     );
 };

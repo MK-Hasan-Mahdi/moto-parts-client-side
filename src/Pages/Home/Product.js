@@ -10,9 +10,9 @@ const Product = ({ product }) => {
     }
 
     return (
-        <div className="card bg-stone-200 shadow-xl">
+        <div className="card card-compact w-96 bg-base-100 shadow-xl mx-auto">
             <figure className="px-4 py-6 rounded-lg transform transition duration-500 hover:scale-110">
-                <img classNameName='' src={img} alt="Shoes" className="rounded-xl" />
+                <img className='w-48 rounded-xl' src={img} alt="" />
             </figure>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>

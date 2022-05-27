@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import PurchaseForm from './PurchaseForm';
 import swal from 'sweetalert';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const ProductPurchase = () => {
     const { productId } = useParams();
@@ -23,18 +24,18 @@ const ProductPurchase = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setProduct(data))
-    }, [productId]);
+    }, [productId, product]);
 
 
     const handleQuantity = e => {
         e.preventDefault();
         const inputQuantity = e.target.quantity.value;
         // minORder < inputValue > stock
-        if (inputQuantity < minOrderQty) {
-            alert(`Minimum order quantity ${minOrderQty}`);
+        if (inputQuantity > availableQty) {
+            toast.error(`Don't have enough quantity`);
         }
-        else if (inputQuantity > availableQty) {
-            alert(`Minimum order quantity is ${minOrderQty}`);
+        else if (inputQuantity < minOrderQty) {
+            toast.error(`Minimum order quantity is ${minOrderQty}`);
         } else {
             setQuantity(inputQuantity)
         }

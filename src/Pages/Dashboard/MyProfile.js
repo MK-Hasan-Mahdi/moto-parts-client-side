@@ -1,101 +1,126 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
+import axios from "axios";
+import auth from '../../firebase.init'
 
 const MyProfile = () => {
-    const [user] = useAuthState(auth);
-    const [profile, setProfile] = useState({})
+    const [user, loading, errorHook] = useAuthState(auth);
+    const [newMyUser, setNewMyUser] = useState([]);
+    const email = user?.email;
 
-    // useEffect(() => {
-
-    //     if (user) {
-    //         fetch(`http://localhost:5000/profile?email=${user.email}`)
-    //             .then(res => res.json())
-    //             .then(data => setProfile(data))
-
-    //     }
-    // }, [user])
-
-    const handleProfileForm = event => {
-        // const name = user?.displayName;
-
+    const updateDetails = (event) => {
         event.preventDefault();
 
-        const name = user?.displayName;
-        const email = user?.email;
-        const phone = event.target.phone.value;
-        const address = event.target.address.value;
-        const link = event.target.link.value;
-        // console.log(name, email, phone, address, link);
+        const updatedData = {
+            name: event.target.name.value,
+            number: event.target.number.value,
+            education: event.target.education.value,
+            address: event.target.address.value,
+            link: event.target.link.value,
+        };
 
+        const url = `http://localhost:5000/update/${email}`;
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({ updatedData }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                toast.success("Data updated succsessfully");
+            });
+    };
 
-        // const userInput = {
-        //     name,
-        //     email,
-        //     address: address,
-        //     phone: phone,
-        //     link: link,
-        // }
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5000/users`, {
+                headers: {
+                    // authorization: `Bearer ${localStorage.getItem("accesToken")}`,
+                },
+            })
+            .then((response) => {
+                const myUser = response.data.filter((user1) => user1.email == email);
+                setNewMyUser(myUser);
+            });
+    }, []);
 
-        // //post profile to database
-        // fetch('http://localhost:5000/profile', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(userInput)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data)
-        //     })
-
-    }
-
-
+    console.log(newMyUser);
 
     return (
-        <div className='w-full mx-auto custom-shadow bg-base-100 pt-10 pb-10 px-10 rounded-lg'>
-            <h1 className='text-2xl md:text-3xl font-medium text-slate-500 text-center mb-10'>My Profile</h1>
-            <form onSubmit={handleProfileForm} className='grid grid-cols-1 gap-3 justify-items-center mt-3 '>
-
-                <input type="text" name='name' value={user?.displayName || ""} className="input input-bordered w-full max-w-xs" />
-                <input type="email" name='email' disabled value={user?.email || ""} className="input input-bordered w-full max-w-xs" />
-                <input type="text" name='phone' placeholder="Phone" className="input input-bordered w-full max-w-xs" />
-                <input type="text" name='address' placeholder="Address" className="input input-bordered w-full max-w-xs" />
-                <input type="text" name='link' placeholder="Link" className="input input-bordered w-full max-w-xs" />
-                <input type="submit" placeholder="Submit" className="btn btn-primary w-full max-w-xs" />
+        <div className="card w-96 m-auto bg-base-100 shadow-xl">
+            <h2 className="text-bold text-xl mt-5 uppercase">Profile</h2>
+            <form action="" onSubmit={updateDetails}>
+                <div class="card-body">
+                    <div class="form-control">
+                        <input
+                            type="text"
+                            placeholder="Your Name"
+                            class="input input-bordered"
+                            name="name"
+                            defaultValue={newMyUser[0]?.updatedData?.name}
+                        />
+                    </div>
+                    <div class="form-control">
+                        <input
+                            type="text"
+                            placeholder="email"
+                            class="input input-bordered"
+                            value={user?.email}
+                            disabled
+                        />
+                    </div>
+                    <div class="form-control">
+                        <input
+                            type="text"
+                            placeholder="Address"
+                            class="input input-bordered"
+                            name="address"
+                            defaultValue={newMyUser[0]?.updatedData?.address}
+                        />
+                    </div>
+                    <div class="form-control">
+                        <input
+                            type="text"
+                            placeholder="education"
+                            class="input input-bordered"
+                            name="education"
+                            defaultValue={newMyUser[0]?.updatedData?.education}
+                        />
+                    </div>
+                    <div class="form-control">
+                        <input
+                            type="number"
+                            placeholder="phone number"
+                            class="input input-bordered"
+                            name="number"
+                            defaultValue={newMyUser[0]?.updatedData?.number}
+                        />
+                    </div>
+                    <div class="form-control">
+                        <input
+                            type="text"
+                            placeholder="Linkdin Link"
+                            class="input input-bordered"
+                            name="link"
+                            defaultValue={newMyUser[0]?.updatedData?.link}
+                        />
+                    </div>
+                    <div class="form-control mt-6">
+                        <button class="btn btn-primary" type="submit">
+                            Update
+                        </button>
+                    </div>
+                </div>
             </form>
-
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Treatment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* {
-                            profile.map((p) =>
-                                <tr className='hover' key={p._id}>
-
-                                    <th>{p.name}</th>
-                                    <th>{p.email}</th>
-                                    <th>{p.address}</th>
-                                    <th>{p.phone}</th>
-                                    <th>{p.link}</th>
-
-                                </tr>)
-                        } */}
-
-                    </tbody>
-                </table>
-            </div>
-
+            <div class="divider">OR</div>
+            <button onClick={() => signOut(auth)} className="btn">
+                SingOut
+            </button>
         </div>
     );
 };
