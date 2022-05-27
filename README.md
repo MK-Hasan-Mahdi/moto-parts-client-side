@@ -10,8 +10,10 @@
 - DaisyUI
 - Firebase
 - Mongodb
+- Express
+- Jsonwebtoken
 - React Hook Form, React Query
-- React Toastify, Sweet Alert, SwiperJS
+- React Toastify, SwiperJS
 
 ## 🛠 Skills
 Javascript, HTML, CSS, Bootstrap, Tailwind, React, Firebase, Mongodb...
