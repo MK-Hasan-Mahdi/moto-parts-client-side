@@ -13,7 +13,7 @@ const ManageProducts = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     const remainingProduct = products.filter(product => product._id !== id);
                     setProducts(remainingProduct);
                 })

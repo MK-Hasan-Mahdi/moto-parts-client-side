@@ -8,7 +8,7 @@ const AddReview = () => {
     const [user, loading, errorHook] = useAuthState(auth);
     const navigate = useNavigate();
 
-    const HandleReview = (event) => {
+    const handleReview = (event) => {
         event.preventDefault();
         const Review = {
             email: user.email,
@@ -26,7 +26,7 @@ const AddReview = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 toast.success("Review Added succsessfully");
                 navigate("/dashboard");
             })
@@ -39,7 +39,7 @@ const AddReview = () => {
             <div class="hero-content flex-col lg:flex-row-reverse">
                 <div class="card flex-shrink-0 w-full shadow-2xl bg-base-100">
                     <div class="card-body">
-                        <form action="" onSubmit={HandleReview}>
+                        <form action="" onSubmit={handleReview}>
                             <div class="form-control">
                                 <label class="label">
                                     <span class="label-text">Title</span>

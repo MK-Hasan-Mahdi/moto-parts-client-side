@@ -20,7 +20,7 @@ const MyOrders = () => {
                 }
             })
                 .then(res => {
-                    console.log('response', res);
+                    // console.log('response', res);
                     if (res.status === 401 || res.status === 403) {
                         signOut(auth);
                         localStorage.removeItem('accessToken');
@@ -62,7 +62,7 @@ const MyOrders = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     const remainingOrder = orders.filter(order => order._id !== id)
                     setOrders(remainingOrder);
                 })
@@ -71,7 +71,7 @@ const MyOrders = () => {
 
     // payment for order
     const handlePaymentOrder = () => {
-        console.log('give payment');
+        // console.log('give payment');
     }
 
     return (

@@ -34,11 +34,11 @@ const Signup = () => {
     }
 
     if (token) {
-        console.log(user || googleUser);
+        // console.log(user || googleUser);
         navigate(from, { replace: true });
     }
     const onSubmit = async data => {
-        // console.log(data)
+        // // console.log(data)
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
     };

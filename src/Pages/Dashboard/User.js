@@ -25,7 +25,7 @@ const User = ({ user, refetch }) => {
                 if (data.modifiedCount > 0) {
                     refetch();
                     toast.success(`You are now Admin`)
-                    // console.log(data)
+                    // // console.log(data)
                 }
             })
     }

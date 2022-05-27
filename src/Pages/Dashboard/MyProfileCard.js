@@ -10,7 +10,7 @@ const MyProfileCard = ({ singleUser }) => {
     if (!singleUser) {
         return <Loading></Loading>
     }
-    // console.log(singleUser)
+    // // console.log(singleUser)
     return (
         <>
 

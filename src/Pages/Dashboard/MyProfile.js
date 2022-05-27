@@ -31,7 +31,7 @@ const MyProfile = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 toast.success("Data updated succsessfully");
             });
     };
@@ -49,7 +49,7 @@ const MyProfile = () => {
             });
     }, []);
 
-    console.log(newMyUser);
+    // console.log(newMyUser);
 
     return (
         <div className="card w-96 m-auto bg-base-100 shadow-xl">

@@ -26,7 +26,7 @@ const Login = () => {
 
     useEffect(() => {
         if (token) {
-            // console.log(user);
+            // // console.log(user);
             navigate(from, { replace: true });
         }
     }, [token, from, navigate])
@@ -40,14 +40,14 @@ const Login = () => {
         erroMsg = <p className='text-red-500'>Errorrr: {error?.message || googleError?.message} </p>
     }
     // if (token) {
-    //     // console.log(user || googleUser);
+    //     // // console.log(user || googleUser);
     //     navigate(from, { replace: true });
     // }
 
 
 
     const onSubmit = data => {
-        // console.log(data)
+        // // console.log(data)
         signInWithEmailAndPassword(data.email, data.password)
     };
 

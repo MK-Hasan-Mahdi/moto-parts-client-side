@@ -1,45 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import PurchaseForm from './PurchaseForm';
 import swal from 'sweetalert';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 const ProductPurchase = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({});
     // console.log(product);
     const { _id, name, description, price, minOrderQty, availableQty, img } = product;
-
-    // const { register, handleSubmit, formState: { errors }, trigger, reset } = useForm();
     const [quantity, setQuantity] = useState(minOrderQty);
     const [user] = useAuthState(auth);
     const [userInputData, setuserInputData] = useState({});
+    const [disable, setDisable] = useState(false);
+    const [newInputQuantityValue, setnewInputQuantityValue] = useState(0);
+
+    const setInputValue = (e) => {
+        const newQuanty = e.target.value;
+        const minimumOrderQuantiy = parseInt(minOrderQty);
+        const stock = parseInt(availableQty);
+        if (minimumOrderQuantiy < newQuanty && stock > newQuanty) {
+            setDisable(true);
+            setQuantity(newQuanty)
+            setnewInputQuantityValue(newQuanty);
+        }
+        else {
+            setDisable(false);
+        }
+    }
 
     useEffect(() => {
         const url = `https://peaceful-dusk-44249.herokuapp.com/product/${productId}`;
-        console.log(url);
+        // console.log(url);
         fetch(url)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [productId, product]);
 
 
-    const handleQuantity = e => {
+    const handleQuantity = (e) => {
         e.preventDefault();
-        const inputQuantity = e.target.quantity.value;
-        // minORder < inputValue > stock
-        if (inputQuantity > availableQty) {
-            toast.error(`Don't have enough quantity`);
-        }
-        else if (inputQuantity < minOrderQty) {
-            toast.error(`Minimum order quantity is ${minOrderQty}`);
-        } else {
-            setQuantity(inputQuantity)
-        }
-        e.target.quantity.value = '';
+        const inputQuantity = parseInt(newInputQuantityValue);
 
         const newAvailableQty = availableQty - inputQuantity;
         const newProduct = {
@@ -51,6 +53,7 @@ const ProductPurchase = () => {
             img: img
         };
         setProduct(newProduct);
+        // console.log(newProduct);
         const url = `https://peaceful-dusk-44249.herokuapp.com/product/${productId}`
         fetch(url, {
             method: 'PUT',
@@ -61,10 +64,9 @@ const ProductPurchase = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('success', data);
+                // console.log('success', data);
             });
     }
-
 
     const handlePurchaseForm = data => {
         const name = user?.displayName;
@@ -97,7 +99,7 @@ const ProductPurchase = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                 })
             // alert msg
             swal({
@@ -109,27 +111,9 @@ const ProductPurchase = () => {
 
 
         }
-
-        //     fetch(`http: localhost:5000/product/${productId}`, {
-        //         method: 'PUT',
-        //         headers: {
-        //             'content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify(newQuantityObj)
-        //     })
-        //         .then(res => res.json())
-        //         .then(data => {
-
-        //             alert('Purchase Successful')
-        //         })
-        //     reset()
-        // }
     }
 
-
     return (
-
-
         <div className="card lg:card-side bg-base-100 shadow-xl container mx-auto mb-20 py-16 mt-10">
             <div className='md:w-1/2 md:px-10'>
                 <figure><img className='w-2/3' src={img} alt="Album" /></figure>
@@ -139,10 +123,10 @@ const ProductPurchase = () => {
                 <p>Available Qty: {availableQty}</p>
                 <p>Min Order Qty: {minOrderQty}</p>
                 <form onSubmit={handleQuantity}>
-                    <input type="number" placeholder="Minimum Quantity 10" name='quantity' className="input input-bordered input-secondary w-full max-w-xs"
+                    <input type="number" onChange={setInputValue} placeholder="Minimum Quantity 10" name='quantity' className="input input-bordered input-secondary w-full max-w-xs"
                         required=""
                     />
-                    <button type='submit' className=" btn btn-primary ml-2"> Purchase</button>
+                    <button disabled={!disable} type='submit' className=" btn btn-primary ml-2"> Purchase</button>
                 </form>
             </div>
 

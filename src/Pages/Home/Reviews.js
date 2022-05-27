@@ -11,7 +11,7 @@ const Reviews = () => {
                 setReviewes(res);
             });
     }, [])
-    // console.log(reviewes);
+    // // console.log(reviewes);
 
     return (
         <div>

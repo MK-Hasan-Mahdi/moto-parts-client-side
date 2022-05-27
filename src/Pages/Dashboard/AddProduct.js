@@ -13,7 +13,7 @@ const AddProduct = () => {
             availableQty: event.target.availableQty.value,
             img: event.target.img.value,
         };
-        console.log(newProducts);
+        // console.log(newProducts);
 
         // upload a product
         const url = `https://peaceful-dusk-44249.herokuapp.com/product`;
@@ -26,7 +26,7 @@ const AddProduct = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 toast.success("added succsessfully");
             });
 
