@@ -12,7 +12,7 @@ const ManageOrders = () => {
     // }, []);
 
     useEffect(() => {
-        const url = `http://localhost:5000/orders`;
+        const url = `https://peaceful-dusk-44249.herokuapp.com/orders`;
         // console.log(url);
         fetch(url)
             .then(res => res.json())
@@ -39,16 +39,15 @@ const ManageOrders = () => {
 
     return (
         <div className='container'>
-            <h2 className='text-center mt-2'>All Products</h2>
+            <h2 className='text-center mt-2'>Manage All Orders</h2>
             <div className='d-flex justify-content-center align-items-center my-5'>
                 <div class="overflow-x-auto">
                     <table class="table w-full">
                         <thead>
                             <tr>
                                 <th>Item ID</th>
-                                <th>Item Name</th>
-                                <th>Availablt Qty</th>
-                                <th>Image</th>
+                                <th>User</th>
+                                <th>Email</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -59,7 +58,6 @@ const ManageOrders = () => {
                                         <th>{order._id}</th>
                                         <td>{order.name}</td>
                                         <td>{order.email}</td>
-                                        <td><img className='' style={{ height: '100px', width: '100px' }} alt="" /></td>
                                         <td><button onClick={() => handleDeleteOrder(order._id)} className='btn btn-error'>Delete</button></td>
                                     </tr>)
                             }

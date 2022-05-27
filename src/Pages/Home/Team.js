@@ -12,15 +12,13 @@ const Team = () => {
             <div className="max-w-screen-xl px-4 mx-auto md:px-8 pt-10 pb-10 lg:pt-20 lg:pb-20">
                 <div className="mb-10 md:mb-16">
                     <h2
-                        className="mb-4 text-2xl font-bold text-center text-gray-800 lg:text-3xl md:mb-6"
+                        className="mb-4 font-bold text-center text-gray-800 lg:text-4xl text-4xl md:mb-6 py-4"
                     >
-                        Our Team Members
+                        Our Business Members
                     </h2>
 
                     <p className="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis
-                        perspiciatis omnis aspernatur impedit vel, consectetur laudantium nulla et
-                        aliqua
+                        To get more work done while maintaining a healthy work-life balance, successful business leaders look for ways to manage their time more efficiently.
                     </p>
                 </div>
 
@@ -35,7 +33,7 @@ const Team = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
-                            <div className="font-bold text-indigo-500 md:text-lg">John Doe</div>
+                            <div className="font-bold text-indigo-500 md:text-lg">Maher Zami</div>
                             <p className="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
                                 Founder / CEO
                             </p>
@@ -61,9 +59,9 @@ const Team = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
-                            <div className="font-bold text-indigo-500 md:text-lg">John Doe</div>
+                            <div className="font-bold text-indigo-500 md:text-lg">Sayem Rehan</div>
                             <p className="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
-                                Web Developer
+                                Production Manager
                             </p>
                             <div className="social flex">
                                 <div className='flex gap-4'>
@@ -85,9 +83,9 @@ const Team = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
-                            <div className="font-bold text-indigo-500 md:text-lg">Scarlet</div>
+                            <div className="font-bold text-indigo-500 md:text-lg">Fayez-Ud-Doulah</div>
                             <p className="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
-                                Devops Engineer
+                                Business Coordinator
                             </p>
                             <div className="social flex">
                                 <div className='flex gap-4'>
