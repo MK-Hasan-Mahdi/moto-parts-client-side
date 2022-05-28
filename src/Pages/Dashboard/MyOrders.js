@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import swal from 'sweetalert';
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -100,8 +100,14 @@ const MyOrders = () => {
                                     <td>{order.product}</td>
                                     <td>{order.quantity}</td>
                                     <td>{order.price}</td>
+
+
                                     <td><button onClick={() => handleDeleteOrder(order._id)} class="btn btn-sm btn-outline btn-error"><span>Cancel Order</span></button></td>
-                                    <td><button onClick={() => handlePaymentOrder(order._id)} class="btn btn-sm btn-outline"><span>Payment</span></button></td>
+
+                                    <td>
+                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm btn-success'>Pay</button></Link>}
+                                        {(order.price && order.paid) && <span className='btn btn-sm btn-success'>Paid</span>}
+                                    </td>
                                 </tr>)
                         }
 

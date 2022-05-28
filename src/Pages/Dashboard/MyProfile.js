@@ -53,7 +53,7 @@ const MyProfile = () => {
 
     return (
         <div className="card w-96 m-auto bg-base-100 shadow-xl">
-            <h2 className="text-bold text-xl mt-5 uppercase">Profile</h2>
+            <h2 className="text-bold text-xl mt-5 uppercase text-center">Profile</h2>
             <form action="" onSubmit={updateDetails}>
                 <div class="card-body">
                     <div class="form-control">

@@ -2,7 +2,6 @@ import './App.css';
 import Navbar from './Pages/Shared/Navbar';
 import { Routes, Route, Link } from "react-router-dom";
 import Home from './Pages/Home/Home';
-import About from './Pages/About/About';
 import ProductPurchase from './Pages/Home/ProductPurchase';
 import Login from './Pages/Login/Login';
 import Signup from './Pages/Login/Signup';
@@ -24,6 +23,7 @@ import MyPortfolio from './Pages/MyPortfolio/MyPortfolio';
 import Blogs from './Pages/Blogs/Blogs';
 import DashboardFirst from './Pages/Dashboard/DashboardFirst';
 import AllProducts from './Pages/AllProducts/AllProducts';
+import Payment from './Pages/Dashboard/Payment';
 
 function App() {
   return (
@@ -48,6 +48,7 @@ function App() {
           <Route path='myprofile' element={<MyProfile />}></Route>
           <Route path='myorder' element={<MyOrders />}></Route>
           <Route path='addreview' element={<AddReview />}></Route>
+          <Route path='payment/:id' element={<Payment />}></Route>
           <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>}></Route>
           <Route path='addproduct' element={<RequireAdmin><AddProduct /></RequireAdmin>}></Route>
           <Route path='manageproducts' element={<RequireAdmin><ManageProducts /></RequireAdmin>}></Route>
