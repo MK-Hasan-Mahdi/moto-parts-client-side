@@ -11,7 +11,7 @@
 - Firebase
 - Mongodb
 - Express
-- Jsonwebtoken
+- Jsonwebtoken, StripeJS
 - React Hook Form, React Query
 - React Toastify, SwiperJS
 

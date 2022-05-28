@@ -73,7 +73,9 @@ const MyOrders = () => {
 
     return (
         <div>
-            <h2 className='text-center text-3xl p-2'>My Purchase Order: {orders.length} </h2>
+            {/* <h2 className='text-center text-3xl p-2'>My Purchase Order: {orders.length} </h2> */}
+            {orders?.length ? <h1 className='text-center text-3xl p-2 my-6 font-bold sp-style text-orange-600 mt-10'>You have ordered {orders?.length} {orders?.length == 1 ? 'parts' : 'partses'} :</h1> : <h1 className='font-bold text-2xl sp-style text-red-900 mt-10'>You Don't Have any order</h1>}
+
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -83,31 +85,43 @@ const MyOrders = () => {
                             <th>Product</th>
                             <th>Qty</th>
                             <th>Price</th>
-                            <th>Action</th>
-                            <th>Payment</th>
+                            <th>Transaction ID</th>
+                            <th>Shipment</th>
+                            <th>Cancel Order</th>
+                            <th>Payment Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             orders.map((order) =>
-                                <tr className='hover' key={order._id}>
+                                <tr className='' key={order._id}>
                                     {/* <th>{index + 1}</th> */}
                                     <th>{order.name}</th>
                                     <td>{order.email}</td>
                                     <td>{order.product}</td>
                                     <td>{order.quantity}</td>
                                     <td>{order.price}</td>
+                                    {/* <td><p className='text-success font-bold'>{order.transactionId}</p></td> */}
+                                    <td>
+                                        {order.transactionId
+                                            ? <span className="text-green-700 font-bold">{order.transactionId} </span> : <span className='text-red-500 sp-style font-bold text-xl'>Pay First </span>
+
+                                        }</td>
+                                    <td>{order.transactionId
+                                        ? <span className="text-green-700 font-bold">Done</span> : <span className='text-red-500 sp-style font-bold text-xl'>Not Yet Delivered</span>
+
+                                    }</td>
 
 
                                     <td><button onClick={() => handleDeleteOrder(order._id)} class="btn btn-sm btn-outline btn-error"><span>Cancel Order</span></button></td>
 
                                     <td>
-                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm btn-success'>Pay</button></Link>}
+                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm btn-outline btn-success'>Payment</button></Link>}
 
                                         {(order.price && order.paid) &&
                                             <div>
-                                                <p><span className='text-success'>Paid</span></p>
-                                                <p>Tansaction ID: <span className='text-success'>{order.transactionId}</span></p>
+                                                <p><span className='text-success text-xl font-bold'>Paid</span></p>
+
                                             </div>
                                         }
                                     </td>
