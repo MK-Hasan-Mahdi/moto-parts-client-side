@@ -111,7 +111,7 @@ const MyProfile = () => {
                         />
                     </div>
                     <div class="form-control mt-6">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-secondary" type="submit">
                             Update
                         </button>
                     </div>

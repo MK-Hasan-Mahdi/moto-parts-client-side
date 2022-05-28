@@ -21,7 +21,7 @@ const Product = ({ product }) => {
                 <p className='font-medium'>Minimum Order Quantity: {minOrderQty}</p>
                 <p className='font-medium'>Available Quantity: {availableQty}</p>
                 <div className="card-actions">
-                    <button onClick={() => navigateToPurchase(_id)} className="btn w-full btn-primary text-center ">Purchase</button>
+                    <button onClick={() => navigateToPurchase(_id)} className="btn w-full btn-secondary text-center ">Purchase</button>
                 </div>
             </div>
         </div>

@@ -79,7 +79,7 @@ const AddReview = () => {
                             </div>
 
                             <div className="form-control mt-6">
-                                <input type="submit" className="btn" value="submit" />
+                                <input type="submit" className="btn btn-secondary" value="submit" />
                             </div>
                         </form>
                     </div>

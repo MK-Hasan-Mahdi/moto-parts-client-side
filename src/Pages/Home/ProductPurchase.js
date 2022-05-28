@@ -124,7 +124,7 @@ const ProductPurchase = () => {
                     <input type="number" onChange={setInputValue} placeholder="Minimum Quantity 10" name='quantity' className="input input-bordered input-secondary w-full max-w-xs"
                         required=""
                     />
-                    <button disabled={!disable} type='submit' className=" btn btn-primary ml-2"> Purchase</button>
+                    <button disabled={!disable} type='submit' className=" btn btn-secondary ml-2"> Purchase</button>
                 </form>
             </div>
 
