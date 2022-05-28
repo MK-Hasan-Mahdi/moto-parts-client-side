@@ -38,6 +38,7 @@ const Payment = () => {
                     <Elements stripe={stripePromise}>
                         <CheckoutForm
                             order={order}
+                            isLoading={isLoading}
                         />
                     </Elements>
                 </div>

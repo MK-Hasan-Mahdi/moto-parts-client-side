@@ -108,7 +108,7 @@ const MyOrders = () => {
 
                                         }</td>
                                     <td>{order.transactionId
-                                        ? <span className="text-green-700 font-bold">Done</span> : <span className='text-red-500 sp-style font-bold text-xl'>Not Yet Delivered</span>
+                                        ? <span className="text-green-700 font-bold">Done</span> : <span className='text-red-500 sp-style font-bold text-xl'>On Process</span>
 
                                     }</td>
 

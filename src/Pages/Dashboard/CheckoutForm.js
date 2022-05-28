@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import Loading from '../Shared/Loading';
+import swal from 'sweetalert';
 
-const CheckoutForm = ({ order }) => {
+const CheckoutForm = ({ order, isLoading }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -27,7 +29,11 @@ const CheckoutForm = ({ order }) => {
                 }
             });
 
-    }, [price])
+    }, [price]);
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
 
     const handleSubmit = async (event) => {
@@ -94,8 +100,9 @@ const CheckoutForm = ({ order }) => {
             }).then(res => res.json())
                 .then(data => {
                     setProcessing(false);
-                    console.log(data);
+                    // console.log(data);
                 })
+
         }
 
 

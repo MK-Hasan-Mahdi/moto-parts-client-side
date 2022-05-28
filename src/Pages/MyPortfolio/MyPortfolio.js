@@ -31,7 +31,8 @@ const MyPortfolio = () => {
                         <div class="card-body">
                             <h2 class="card-title">Md. Kamrul Hasan</h2>
                             <h2 class="card-title">Email: mkhasan6891@gmail.com</h2>
-                            <p>Course: Complete Web Development Course With Jhankar Mahbub </p>
+                            <h2 class="card-title">Github-Link: https://github.com/MK-Hasan-Mahdi</h2>
+                            <h2>Course: Complete Web Development Course With Jhankar Mahbub </h2>
 
                         </div>
                     </div>
