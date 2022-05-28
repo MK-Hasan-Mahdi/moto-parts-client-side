@@ -17,7 +17,7 @@ const Product = ({ product }) => {
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
                 <p>{description}</p>
-                <p className='text-lg font-semibold'>Price: {price}</p>
+                <p className='text-lg font-semibold'>Price: ${price}</p>
                 <p className='font-medium'>Minimum Order Quantity: {minOrderQty}</p>
                 <p className='font-medium'>Available Quantity: {availableQty}</p>
                 <div className="card-actions">

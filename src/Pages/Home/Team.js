@@ -11,12 +11,9 @@ const Team = () => {
         <div>
             <div className="max-w-screen-xl px-4 mx-auto md:px-8 pt-10 pb-10 lg:pt-20 lg:pb-20">
                 <div className="mb-10 md:mb-16">
-                    <h2
-                        className="mb-4 font-bold text-center text-gray-800 lg:text-4xl text-4xl md:mb-6 py-4"
-                    >
+                    <h2 className="mb-4 font-bold text-center text-gray-800 lg:text-4xl text-4xl md:mb-6 py-4">
                         Our Business Members
                     </h2>
-
                     <p className="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg">
                         To get more work done while maintaining a healthy work-life balance, successful business leaders look for ways to manage their time more efficiently.
                     </p>
@@ -28,7 +25,7 @@ const Team = () => {
                             <img src={team1}
 
                                 alt=""
-                                className="object-cover object-center w-full h-full"
+                                className="object-cover object-center w-full h-full transform transition duration-500 hover:scale-110"
                             />
                         </div>
 
@@ -54,7 +51,7 @@ const Team = () => {
                             <img src={team3}
 
                                 alt=""
-                                className="object-cover object-center w-full h-full"
+                                className="object-cover object-center w-full h-full transform transition duration-500 hover:scale-110"
                             />
                         </div>
 
@@ -78,7 +75,7 @@ const Team = () => {
                             <img src={team4}
 
                                 alt=""
-                                className="object-cover object-center w-full h-full"
+                                className="object-cover object-center w-full h-full transform transition duration-500 hover:scale-110"
                             />
                         </div>
 

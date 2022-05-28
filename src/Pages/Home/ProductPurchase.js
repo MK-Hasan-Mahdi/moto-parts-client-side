@@ -68,7 +68,7 @@ const ProductPurchase = () => {
             });
     }
 
-    const handlePurchaseForm = data => {
+    const handlePurchaseForm = (data, event) => {
         const name = user?.displayName;
         const productName = product.name;
         const userInput = {
@@ -88,7 +88,6 @@ const ProductPurchase = () => {
         } else {
             const newQuantity = parseInt(availableQty) - parseInt(quantity)
             const newQuantityObj = { newQuantity }
-
             //post order to database
             fetch('https://peaceful-dusk-44249.herokuapp.com/order', {
                 method: 'POST',
@@ -101,15 +100,14 @@ const ProductPurchase = () => {
                 .then(data => {
                     // console.log(data)
                 })
-            // alert msg
+            // success msg
             swal({
                 title: "Congratulation!",
                 text: "Purchase Complete",
                 icon: "success",
                 button: "OK",
             });
-
-
+            event.target.reset();
         }
     }
 
