@@ -7,6 +7,7 @@ const CheckoutForm = ({ order }) => {
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [transactionId, setTransactionId] = useState('');
+    const [processing, setProcessing] = useState(false);
     const [clientSecret, setClientSecret] = useState('');
     const { _id, price, name, email } = order;
 
@@ -45,16 +46,18 @@ const CheckoutForm = ({ order }) => {
             type: 'card',
             card
         });
-        if (error) {
-            setCardError(error.message);
-            console.log(error);
-        } else {
-            setCardError('');
-        }
-        setSuccess('');
-        // setCardError(error?.message || "");
+        // if (error) {
+        //     setCardError(error.message);
+        //     console.log(error);
+        // } else {
+        //     setCardError('');
+        // }
 
-        // payment
+        setCardError(error?.message || '');
+        setSuccess('');
+        setProcessing(true);
+
+        // confirm payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -69,12 +72,30 @@ const CheckoutForm = ({ order }) => {
         );
         if (intentError) {
             setCardError(intentError?.message);
+            setProcessing(false);
         }
         else {
             setCardError('');
             setTransactionId(paymentIntent.id)
-            console.log(paymentIntent);
-            success('Payment done');
+            // console.log(paymentIntent);
+            setSuccess('Payment done');
+
+            const payment = {
+                order: _id,
+                transactionId: paymentIntent.id
+            }
+            fetch(`http://localhost:5000/order/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+            }).then(res => res.json())
+                .then(data => {
+                    setProcessing(false);
+                    console.log(data);
+                })
         }
 
 
