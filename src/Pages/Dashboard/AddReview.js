@@ -35,40 +35,40 @@ const AddReview = () => {
             });
     };
     return (
-        <div class="hero ">
-            <div class="hero-content flex-col lg:flex-row-reverse">
-                <div class="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-                    <div class="card-body">
+        <div className="hero ">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
+                    <div className="card-body">
                         <form action="" onSubmit={handleReview}>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Title</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Title</span>
                                 </label>
                                 <input
                                     type="text"
                                     placeholder="title"
-                                    class="input input-bordered"
+                                    className="input input-bordered"
                                     name="title"
                                 />
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Review</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Review</span>
                                 </label>
-                                <input
+                                <textarea
                                     type="text"
                                     placeholder="Your Review"
-                                    class="input input-bordered"
+                                    className="textarea textarea-bordered"
                                     name="review"
                                 />
                             </div>
-                            <div class="form-control">
-                                <label class="label">
-                                    <span class="label-text">Stars</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Stars</span>
                                 </label>
                                 <select
                                     name="star"
-                                    class="select select-bordered w-full max-w-xs"
+                                    className="select select-bordered w-full max-w-xs"
                                 >
                                     <option selected>1 Star</option>
                                     <option>2 Star</option>
@@ -78,7 +78,7 @@ const AddReview = () => {
                                 </select>
                             </div>
 
-                            <div class="form-control mt-6">
+                            <div className="form-control mt-6">
                                 <input type="submit" className="btn" value="submit" />
                             </div>
                         </form>

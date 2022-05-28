@@ -23,6 +23,7 @@ import ManageOrders from './Pages/Dashboard/ManageOrders';
 import MyPortfolio from './Pages/MyPortfolio/MyPortfolio';
 import Blogs from './Pages/Blogs/Blogs';
 import DashboardFirst from './Pages/Dashboard/DashboardFirst';
+import AllProducts from './Pages/AllProducts/AllProducts';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>} />
-        <Route path="/about" element={<About></About>} />
+        <Route path="/allproducts" element={<AllProducts></AllProducts>} />
         <Route path="/blogs" element={<Blogs></Blogs>} />
         <Route path="/myportfolio" element={<MyPortfolio></MyPortfolio>} />
         <Route path='/product/:productId' element={

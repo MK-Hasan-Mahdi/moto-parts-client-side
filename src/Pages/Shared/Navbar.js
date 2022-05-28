@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
@@ -11,10 +11,11 @@ const Navbar = () => {
         signOut(auth);
         localStorage.removeItem('accessToken');
     };
+    const navigate = useNavigate();
 
     const menuItems = <>
         <li className=''><Link to='/'>Home</Link></li>
-        <li className=''><Link to='/about'>About</Link></li>
+        <li className=''><Link to='/allproducts'>Products</Link></li>
         <li className=''><Link to='/blogs'>Blogs</Link></li>
         <li className=''><Link to='/myportfolio'>My Portfolio</Link></li>
 
@@ -41,7 +42,14 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">Moto-Parts</a>
+
+                <div className="flex-shrink-0 w-fit lg:mx-40">
+                    <h1 onClick={() => navigate('/')}
+                        className="cursor-pointer uppercase  text-xl font-bold logo">
+                        Moto-Parts
+                    </h1>
+                </div>
+                {/* <a class="btn btn-ghost normal-case text-xl">Moto-Parts</a> */}
             </div>
             <div class="navbar-end hidden lg:flex">
                 <ul class="menu menu-horizontal p-0">

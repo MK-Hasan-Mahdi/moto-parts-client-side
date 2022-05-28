@@ -1,9 +1,8 @@
 import React from 'react';
 import hasan from '../../assets/hasan.jpg'
-// import myImage from '../../Assets/Images/Ayon2.jpg'
-// import projectOne from '../../Assets/Images/projectOne.png'
-// import projectTwo from '../../Assets/Images/projectTwo.png'
-// import projectThree from '../../Assets/Images/projectThree.png'
+import projectOne from '../../assets/projectOne.png'
+import projectTwo from '../../assets/projectTwo.png'
+import projectThree from '../../assets/projectThree.png'
 
 const MyPortfolio = () => {
     return (
@@ -14,16 +13,14 @@ const MyPortfolio = () => {
                     <p className='text-gray-500 mt-5'>
                         I am a MERN stack web developer. I have completed Web development course from Programming Hero. Now I am looking an intern and also looking for opportunities to further develop my skills.
                     </p>
-                    <p className='text-gray-500 my-3'>Skilled in HTML, CSS, Bootstrap, TailwindCSS, Javascript(ES6), and MERN (Mongo DB, Express, React, Node) stack, I also have sound knowledge of Data Structures and Algorithms with great problem-solving capabilities.</p>
+                    <p className='text-gray-500 my-3'>Skilled in HTML, CSS, Bootstrap, TailwindCSS, Javascript(ES6), and MERN (Mongo DB, Express, React, Node) stack, I also have sound knowledge of PHP and MYSQL.</p>
 
                     <p className='text-gray-500'>
-                        I can vouch for the fact that I am a fast learner with a penchant to both learn and unlearn; That is learning the latest relevant technologies and skills. I also bring with me some fresh ideas and I am confident you will find many of them to be quite useful and innovative.
+                        I can vouch for the fact that I am a sound learner with a penchant to both learn and work; That is learning the latest relevant technologies and skills. I also bring with me some fresh ideas and I am confident you will find many of them to be quite useful and innovative.
                     </p>
 
                 </div>
-                <div className="image flex-1 md:ml-5 mt-10 md:mt-0">
-                    {/* <img className='md:w-1/2 md:ml-auto' src={myImage} alt="" /> */}
-                </div>
+
             </div>
             {/* Skills */}
 
@@ -40,22 +37,24 @@ const MyPortfolio = () => {
                     </div>
                 </div>
                 <div>
-                    <h1 className='text-center md:mb-10 md:my-0 my-10 text-uppercase pb-5 text-primary text-4xl md:text-5xl mt-20 font-semibold custom-border-primary w-fit mx-auto'>Sample of My projects</h1>
+                    <h1 className='text-center md:mb-10 md:my-10 my-10 text-uppercase pb-5 text-black text-4xl md:text-5xl mt-20 font-semibold custom-border-primary w-fit mx-auto uppercase shadow-sm'>Some sample of my projects</h1>
                     <div className="grid grid-cols-3">
                         <div className="mx-3">
-                            {/* <a href="https://flavoro-4fd30.web.app/">
+                            <a href="https://primefactor-8a8c8.web.app/">
                                 <img className='w-full ml-auto object-fill' src={projectOne} alt="" />
-                            </a> */}
+                            </a>
                         </div>
+
                         <div className="mx-3">
-                            {/* <a href="https://ivent-3c76f.web.app/">
-                                <img className=' w-full ml-auto object-fill' src={projectThree} alt="" />
-                            </a> */}
-                        </div>
-                        <div className="mx-3">
-                            {/* <a href="https://github.com/AyonJD/practice-01-bootstrap">
+                            <a href="https://edu-student-e3824.web.app/">
                                 <img className=' w-full ml-auto object-fill' src={projectTwo} alt="" />
-                            </a> */}
+                            </a>
+                        </div>
+
+                        <div className="mx-3">
+                            <a href="https://epic-snyder-0c99f6.netlify.app">
+                                <img className=' w-full ml-auto object-fill' src={projectThree} alt="" />
+                            </a>
                         </div>
 
                     </div>
