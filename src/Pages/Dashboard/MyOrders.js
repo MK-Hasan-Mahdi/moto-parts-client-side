@@ -69,10 +69,7 @@ const MyOrders = () => {
         }
     }
 
-    // payment for order
-    const handlePaymentOrder = () => {
-        console.log('give payment');
-    }
+
 
     return (
         <div>
@@ -106,7 +103,13 @@ const MyOrders = () => {
 
                                     <td>
                                         {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm btn-success'>Pay</button></Link>}
-                                        {(order.price && order.paid) && <span className='btn btn-sm btn-success'>Paid</span>}
+
+                                        {(order.price && order.paid) &&
+                                            <div>
+                                                <p><span className='text-success'>Paid</span></p>
+                                                <p>Tansaction ID: <span className='text-success'>{order.transactionId}</span></p>
+                                            </div>
+                                        }
                                     </td>
                                 </tr>)
                         }
