@@ -30,7 +30,7 @@ const Team = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
-                            <div className="font-bold text-indigo-500 md:text-lg">Maher Zami</div>
+                            <div className="font-bold text-yellow-500 md:text-lg">Maher Zami</div>
                             <p className="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
                                 Founder / CEO
                             </p>
@@ -56,7 +56,7 @@ const Team = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
-                            <div className="font-bold text-indigo-500 md:text-lg">Sayem Rehan</div>
+                            <div className="font-bold text-yellow-500 md:text-lg">Sayem Rehan</div>
                             <p className="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
                                 Production Manager
                             </p>
@@ -80,7 +80,7 @@ const Team = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
-                            <div className="font-bold text-indigo-500 md:text-lg">Fayez-Ud-Doulah</div>
+                            <div className="font-bold text-yellow-500 md:text-lg">Fayez-Ud-Doulah</div>
                             <p className="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
                                 Business Coordinator
                             </p>
