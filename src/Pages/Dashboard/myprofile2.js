@@ -3,11 +3,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
-// import insta from '../../Assets/icons/instagramIcon.png'
-// import facebook from '../../Assets/icons/facebookIcon.png'
-// import twitter from '../../Assets/icons/twitterIcon.png'
+import insta from '../../Assets/icons/instagramIcon.png'
+import facebook from '../../Assets/icons/facebookIcon.png'
+import twitter from '../../Assets/icons/twitterIcon.png'
 import ProfileModal from './ProfileModal';
-// import { BookOpenIcon, MailIcon, MapIcon, PhoneIcon, UserIcon, } from "@heroicons/react/solid";
+import { BookOpenIcon, MailIcon, MapIcon, PhoneIcon, UserIcon, } from "@heroicons/react/solid";
+import { current } from 'daisyui/src/colors';
 
 
 const MyProfile = () => {
@@ -15,7 +16,7 @@ const MyProfile = () => {
     const [openModal, setOpenModal] = useState(false);
     const { isLoading, data: currentUser, refetch, } = useQuery("oneUser", () =>
         fetch(
-            `http://localhost:5000/currentUser?email=${user?.email}`,
+            `https://calm-bayou-08500.herokuapp.com/currentUser?email=${user?.email}`,
             {
                 method: "GET",
                 headers: {
@@ -30,8 +31,12 @@ const MyProfile = () => {
     }
 
     return (
-        <div className="">
+        <div className="bg-secondary h-full">
             <div className="px-5 bg-white text-primary">
+                {/* <h1 className="text-4xl  pt-5 pb-10 uppercase text-center">
+          {" "}
+          My Profile
+        </h1> */}
                 <div className="lg:px-24 px-2 bg-neutral bg-opacity-90 h-full w-full mx-auto">
                     <div className=" pt-10 flex-col md:flex-row ">
                         <div className="avatar online">
@@ -50,7 +55,7 @@ const MyProfile = () => {
                             </h1>
                             <p className="flex text-teal-200">
                                 {" "}
-                                <p className="text-white w-6 h-6 mr-3"></p>
+                                <MailIcon className="text-white w-6 h-6 mr-3"></MailIcon>
                                 <span>{user?.email}</span>
                             </p>
                         </div>
@@ -62,26 +67,26 @@ const MyProfile = () => {
                                     Information
                                 </h2>
                                 <p className="mt-3 flex text-[15px] text-teal-200 items-center">
-                                    <p className="w-6 h-6 mr-3  text-white"></p>{" "}
+                                    <UserIcon className="w-6 h-6 mr-3  text-white"></UserIcon>{" "}
                                     {user?.displayName}
                                 </p>
                                 <p className="mt-2 flex text-[15px] text-teal-200 items-center">
-                                    <p className="w-6 h-6 mr-3  text-white"></p>{" "}
+                                    <MailIcon className="w-6 h-6 mr-3  text-white"></MailIcon>{" "}
                                     {user?.email}
                                 </p>
                                 <p className="mt-2 flex text-[15px] text-teal-200 items-center">
-                                    <p className="w-6 h-6 mr-3  text-white"></p>{" "}
+                                    <PhoneIcon className="w-6 h-6 mr-3  text-white"></PhoneIcon>{" "}
                                     +88-{currentUser?.phone ? currentUser?.phone : 12345678}
                                 </p>
                                 <p className="mt-2 flex text-[15px] text-teal-200 items-center">
-                                    <p className="w-6 h-6 mr-3  text-white"></p>{" "}
+                                    <MapIcon className="w-6 h-6 mr-3  text-white"></MapIcon>{" "}
                                     {currentUser?.address
                                         ? currentUser.address
                                         : "No address given"}
                                 </p>
 
                                 <p className="mt-2 flex text-[15px] text-teal-200 items-center">
-                                    <p className="w-6 h-6 mr-3 text-white"></p>{" "}
+                                    <BookOpenIcon className="w-6 h-6 mr-3 text-white"></BookOpenIcon>{" "}
                                     {currentUser?.study
                                         ? currentUser.study
                                         : "Study info not given"}
@@ -92,7 +97,7 @@ const MyProfile = () => {
                                     Social Media
                                 </h2>
                                 <p className="mt-3 flex items-center text-teal-200">
-                                    {/* <img src={facebook} className="w-6 mr-4 rounded-full" alt="" /> */}
+                                    <img src={facebook} className="w-6 mr-4 rounded-full" alt="" />
                                     <span className="text-sm italic">
                                         {currentUser?.facebook ? currentUser.facebook
                                             : "Facebook info not given"}
@@ -100,7 +105,7 @@ const MyProfile = () => {
                                     </span>
                                 </p>
                                 <p className="mt-2 flex items-center text-teal-200">
-                                    {/* <img src={insta} className="w-6 mr-4 rounded-full" alt="" /> */}
+                                    <img src={insta} className="w-6 mr-4 rounded-full" alt="" />
                                     <span className="text-sm italic">
                                         {currentUser?.instagram
                                             ? currentUser.instagram
@@ -108,7 +113,7 @@ const MyProfile = () => {
                                     </span>
                                 </p>
                                 <p className="mt-2 flex items-center text-teal-200">
-                                    {/* <img src={twitter} className="w-6 mr-4 rounded-full" alt="" /> */}
+                                    <img src={twitter} className="w-6 mr-4 rounded-full" alt="" />
                                     <span className="text-sm italic">
                                         {currentUser?.twitter
                                             ? currentUser.twitter
