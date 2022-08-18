@@ -27,11 +27,13 @@ const AddReview = () => {
                 if (result.success) {
                     const img = result.data.url;
                     const reviewData = {
-                        email: user.email,
+                        email: user?.email,
+                        userName: user?.displayName,
                         title: data.title,
                         userReview: data.userReview,
                         ratings: data.ratings,
                         img: img,
+                        reviewDate: new Date().toLocaleString().split(",")[0],
                     }
                     fetch("https://peaceful-dusk-44249.herokuapp.com/reviews", {
                         method: "POST",
