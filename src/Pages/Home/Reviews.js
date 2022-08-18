@@ -11,15 +11,15 @@ const Reviews = () => {
                 setReviewes(res);
             });
     }, [])
-    // console.log(reviewes);
+    console.log(reviewes);
 
     return (
         <div>
-            <div className="container mx-auto sm:px-10 lg:px-20  mt-10">
+            <div className="bg-[#161E35] ">
 
-                <div className=''>
-                    <h2 className='text-4xl mt-20  py-4 text-center font-bold'>Happy Client Reviews</h2>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 pt-10 pb-10 lg:pt-20 lg:pb-20">
+                <div className='container mx-auto'>
+                    <h2 className='text-4xl mt-20  py-10 text-white text-center font-bold'>Happy Client Reviews</h2>
+                    <div className="grid md:grid-cols-3 md:w-[70%] justify-center items-center mx-auto gap-6 my-10 px-3 py-3 rounded">
                         {
                             reviewes.map(review => <Review
                                 key={review._id}
