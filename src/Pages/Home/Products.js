@@ -12,21 +12,23 @@ const Products = () => {
 
     return (
 
-        <div className='my-28 lg:px-40 '>
-            <div className='text-center'>
+        <div className='bg-blue-500'>
+            <div className='mid-container my-28 lg:px-40 '>
+                <div className='text-center'>
 
-                <h3 className='text-4xl mt-16 mb-8 text-center font-bold'>Parts We Manufacture</h3>
+                    <h3 className='text-4xl mt-16 mb-8 text-center font-bold'>Parts We Manufacture</h3>
+                </div>
+                <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12'>
+                    {
+                        products.slice(0, 6).map(product => <Product
+                            key={product._id}
+                            product={product}
+                        ></Product>)
+                    }
+                </div>
             </div>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5'>
-                {
-                    products.slice(0, 6).map(product => <Product
-                        key={product._id}
-                        product={product}
-                    ></Product>)
-                }
-            </div>
+
         </div>
-
     );
 };
 

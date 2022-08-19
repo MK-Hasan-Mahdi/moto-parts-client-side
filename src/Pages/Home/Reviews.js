@@ -15,11 +15,12 @@ const Reviews = () => {
 
     return (
         <div>
-            <div className="bg-[#161E35] ">
+            <div className=" bg-black py-10">
 
-                <div className='container mx-auto'>
-                    <h2 className='text-4xl mt-20  py-10 text-white text-center font-bold'>Happy Client Reviews</h2>
-                    <div className="grid md:grid-cols-3 md:w-[70%] justify-center items-center mx-auto gap-6 my-10 px-3 py-3 rounded">
+                <div className='mid-container mx-auto'>
+                    <h2 className='text-4xl text-center font-bold'>Happy Client Reviews</h2>
+                    <div className="grid mx-5 lg:mx-auto lg:grid-cols-3 md:grid-cols-2 gap-10 max-w-7xl">
+                        {/* <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-center  mx-auto gap-10 my-10 px-3 py-3 rounded"> */}
                         {
                             reviewes.map(review => <Review
                                 key={review._id}

@@ -24,6 +24,7 @@ import Blogs from './Pages/Blogs/Blogs';
 import DashboardFirst from './Pages/Dashboard/DashboardFirst';
 import AllProducts from './Pages/AllProducts/AllProducts';
 import Payment from './Pages/Dashboard/Payment';
+import MyProfileUpdate from './Pages/Dashboard/MyProfileUpdate';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         }>
           <Route index element={<DashboardFirst />}></Route>
           <Route path='myprofile' element={<MyProfile />}></Route>
+          <Route path='myprofile/updateprofile' element={<MyProfileUpdate />}></Route>
           <Route path='myorder' element={<MyOrders />}></Route>
           <Route path='addreview' element={<AddReview />}></Route>
           <Route path='payment/:id' element={<Payment />}></Route>

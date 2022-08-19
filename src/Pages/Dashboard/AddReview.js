@@ -75,10 +75,11 @@ const AddReview = () => {
     //         });
     // };
     return (
-        <div className="hero ">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-                    <div className="card-body">
+        <div className="bg-[#677E81]">
+            <h1 className="text-2xl text-center text-white mb-3 uppercase">Please Give Your Review</h1>
+            <div className="w-[30%] mx-auto card shadow-2xl border md:p-10 p-3">
+                <div className="">
+                    <div className="">
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-control">
                                 <label className="label">
