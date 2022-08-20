@@ -61,12 +61,12 @@ const MyProfile = () => {
             <div className="card-body mx-auto">
                 <h2 className="card-title text-white">Name: {user?.user?.displayName}</h2>
                 <p className="text-xl text-white">Email: {user?.email} </p>
-                <p className='text-xl text-white'>Education: </p>
-                <p className='text-xl text-white'>Institution: {user?.user?.institute} </p>
                 <p className='text-xl text-white'>Mobile: {user?.user?.mobile} </p>
                 <p className='text-xl text-white'>Address: {user?.user?.address} </p>
-                <p className='text-xl text-white'>Linkedin: </p>
-                <p className='text-xl text-white'>Facebook: </p>
+                <p className='text-xl text-white'>Education: {user?.user?.education} </p>
+                <p className='text-xl text-white'>Institution: {user?.user?.institute} </p>
+                <p className='text-xl text-white'>Linkedin: {user?.user?.linkedin} </p>
+                <p className='text-xl text-white'>Facebook: {user?.user?.facebook} </p>
                 <div className="card-actions justify-center py-10">
                     <button onClick={() => navigate(`/dashboard/myprofile/updateprofile`)} className="btn btn-secondary text-center">Update Profile</button>
                 </div>

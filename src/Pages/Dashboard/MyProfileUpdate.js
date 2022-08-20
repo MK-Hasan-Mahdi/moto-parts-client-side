@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 
 const MyProfileUpdate = () => {
     const [authUser] = useAuthState(auth);
@@ -37,7 +38,7 @@ const MyProfileUpdate = () => {
         );
     }
     if (updating) {
-        return <p>Updating...</p>;
+        return <Loading></Loading>;
     }
 
     const onSubmit = async (data) => {
@@ -59,7 +60,10 @@ const MyProfileUpdate = () => {
                         displayName: data.displayName || authUser.displayName,
                         mobile: data.mobile || user?.mobile,
                         address: data.address || user?.address,
+                        education: data.education || user?.education,
                         institute: data.institute || user?.institute,
+                        linkedin: data.linkedin || user?.linkedin,
+                        facebook: data.facebook || user?.facebook,
                         photoUrl: img || "https://foxdogconsultants.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
                     }
                     // console.log(userInfo);
@@ -85,7 +89,10 @@ const MyProfileUpdate = () => {
                         displayName: data.displayName || authUser.displayName,
                         mobile: data.mobile || user?.mobile || "N/A",
                         address: data.address || user?.address || "N/A",
+                        education: data.education || user?.education,
                         institute: data.institute || user?.institute || "N/A",
+                        linkedin: data.linkedin || user?.linkedin,
+                        facebook: data.facebook || user?.facebook,
                         photoURL: user?.photoURL || authUser?.photoURL || "https://foxdogconsultants.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
                     };
                     // console.log(userInfo);
@@ -183,7 +190,23 @@ const MyProfileUpdate = () => {
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
-                            <span className="label-text">institute</span>
+                            <span className="label-text">Education</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Update Education"
+                            className="input input-bordered w-full "
+                            {...register("education", {
+
+                            })}
+                        />
+                        <label className="label">
+                            {errors.education?.type === 'required' && <span className="label-text-alt text-red-500">{errors.education.message}</span>}
+                        </label>
+                    </div>
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text">Institute</span>
                         </label>
                         <input
                             type="text"
@@ -195,6 +218,38 @@ const MyProfileUpdate = () => {
                         />
                         <label className="label">
                             {errors.institute?.type === 'required' && <span className="label-text-alt text-red-500">{errors.institute.message}</span>}
+                        </label>
+                    </div>
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text">Linkedin</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Update Linkedin"
+                            className="input input-bordered w-full "
+                            {...register("linkedin", {
+
+                            })}
+                        />
+                        <label className="label">
+                            {errors.linkedin?.type === 'required' && <span className="label-text-alt text-red-500">{errors.linkedin.message}</span>}
+                        </label>
+                    </div>
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text">Facebook</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Update Facebook"
+                            className="input input-bordered w-full "
+                            {...register("facebook", {
+
+                            })}
+                        />
+                        <label className="label">
+                            {errors.facebook?.type === 'required' && <span className="label-text-alt text-red-500">{errors.facebook.message}</span>}
                         </label>
                     </div>
 
