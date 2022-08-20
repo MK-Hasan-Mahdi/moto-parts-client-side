@@ -148,10 +148,10 @@ const AddReview = () => {
 
                                     <input
                                         {...register("image", {
-                                            required: {
-                                                value: true,
-                                                message: "Image is Required"
-                                            },
+                                            // required: {
+                                            //     value: true,
+                                            //     message: "Image is Required"
+                                            // },
                                         })}
                                         type="file"
                                         className="text-sm"

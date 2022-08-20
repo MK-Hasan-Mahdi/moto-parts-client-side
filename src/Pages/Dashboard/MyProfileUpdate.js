@@ -8,7 +8,7 @@ import auth from '../../firebase.init';
 const MyProfileUpdate = () => {
     const [authUser] = useAuthState(auth);
     // console.log(authUser);
-    const [updateProfile] = useUpdateProfile(auth);
+    const [updateProfile, updating, error] = useUpdateProfile(auth);
     const [user, setUser] = useState({});
     // console.log(user);
 
@@ -27,14 +27,18 @@ const MyProfileUpdate = () => {
             });
     }, [authUser?.email]);
 
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-        reset,
-    } = useForm();
-
-    const navigate = useNavigate();
+    const { register, formState: { errors }, handleSubmit, reset, } = useForm();
+    // error or update but not so urgent code
+    if (error) {
+        return (
+            <div>
+                <p>Error: {error.message}</p>
+            </div>
+        );
+    }
+    if (updating) {
+        return <p>Updating...</p>;
+    }
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -42,7 +46,7 @@ const MyProfileUpdate = () => {
         const formData = new FormData();
         formData.append("image", image);
         const url = `https://api.imgbb.com/1/upload?key=b87c3c71cee6f1929847f8608981e477`;
-        console.log(url);
+        // console.log(url);
         fetch(url, {
             method: "POST",
             body: formData
@@ -72,9 +76,38 @@ const MyProfileUpdate = () => {
                     toast.success("Profile Updated");
                     updateProfile({
                         displayName: data?.displayName || authUser?.displayName || "N/A",
-                        photoURL: img || "https://foxdogconsultants.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
+                        photoUrl: img || "https://foxdogconsultants.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
                     });
                     reset();
+                }
+                else {
+                    const userInfo = {
+                        displayName: data.displayName || authUser.displayName,
+                        mobile: data.mobile || user?.mobile || "N/A",
+                        address: data.address || user?.address || "N/A",
+                        institute: data.institute || user?.institute || "N/A",
+                        photoURL: user?.photoURL || authUser?.photoURL || "https://foxdogconsultants.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
+                    };
+                    // console.log(userInfo);
+                    fetch(`http://localhost:5000/updateuser/${authUser.email}`, {
+                        method: "PUT",
+                        headers: {
+                            'content-type': 'application/json',
+                            email: `${authUser?.email}`,
+                            // authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                        body: JSON.stringify(userInfo),
+                    })
+                        .then(res => res.json())
+                        .then(json => {
+                            console.log(json);
+                            toast.success("Profile Updated Successfully");
+                            updateProfile({
+                                displayName: data?.displayName || authUser?.displayName || "N/A",
+                                photoURL: user?.photoURL || authUser?.photoURL || "https://foxdogconsultants.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
+                            });
+                            reset();
+                        });
                 }
             })
 
@@ -181,7 +214,10 @@ const MyProfileUpdate = () => {
                         </label>
                     </div>
 
-                    <input className='text-white bg-gradient-to-r from-primary to-secondary border-2 border-secondary hover:border-2 hover:border-primary hover:bg-gradient hover:from-white hover:to-white hover:text-primary transition-all transition-duration:150ms md:w-1/4 font-medium hover:font-medium px-5 py-2 rounded-md cursor-pointer' type="submit" value="Update" />
+
+                    <div className="card-actions justify-center py-10">
+                        <button className="btn btn-secondary text-center" type="submit" value="Update">Update Profile</button>
+                    </div>
                 </form>
             </div>
         </div>

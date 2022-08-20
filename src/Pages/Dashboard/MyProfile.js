@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import { signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
 // import insta from '../../Assets/icons/instagramIcon.png'
@@ -10,39 +13,65 @@ import Loading from '../Shared/Loading';
 
 
 const MyProfile = () => {
-    const [user] = useAuthState(auth);
-    // const { isLoading, data: currentUser, refetch, } = useQuery("oneUser", () =>
-    //     fetch(
-    //         `http://localhost:5000/currentUser?email=${user?.email}`,
-    //         {
-    //             method: "GET",
+    const [signedUser, loading, error] = useAuthState(auth);
+    const [user, setUser] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const email = signedUser?.email;
+        fetch(`http://localhost:5000/user/${email}`)
+            .then(res => res.json())
+            .then(data => setUser(data))
+    }, []);
+    if (loading) {
+        return <Loading></Loading>
+    }
+    // const getItems = async () => {
+    //     const email = signedUser?.email
+    //     const url = `http://localhost:5000/user/${email}`
+    //     // console.log(url);
+    //     try {
+    //         const { data } = await axios.get(url, {
     //             headers: {
-    //                 authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    //             },
+    //                 authorization: `Bearer ${localStorage.getItem('token')}`
+    //             }
+    //         })
+    //         // console.log(data, "data");
+    //         setUser(data)
+
+    //     } catch (error) {
+    //         // console.log(error);
+    //         if (error.response.status === 403 || error.response.status === 401) {
+    //             signOut(auth)
+    //             navigate('/login')
     //         }
-    //     ).then((res) => res.json())
-    // );
-    // console.log(currentUser)
-    // if (isLoading) {
-    //     return <Loading></Loading>;
+    //         // alert(error.message)
+    //     }
     // }
+    // getItems()
 
 
     return (
-        <div class="card card-compact w-96 bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-            <div class="card-body">
-                <h2 class="card-title">Name: {user?.displayName}</h2>
-                <p>Email: {user?.email} </p>
-                <p>Education: </p>
-                <p>Institution: </p>
-                <p>Mobile: </p>
-                <p>Address: </p>
-                <p>Linkedin: </p>
-                <p>Facebook: </p>
-                <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Update Profile</button>
+        <div className="card overflow-visible sm:w-96 lg:w-full bg-red-900 shadow-xl my-20">
+            <div className="avatar mx-auto mt-[-50px]">
+                <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ">
+                    <img src={user?.user?.photoUrl || user?.user?.photoURL} alt="userImage" />
                 </div>
+            </div>
+            <div className="card-body mx-auto">
+                <h2 className="card-title text-white">Name: {user?.user?.displayName}</h2>
+                <p className="text-xl text-white">Email: {user?.email} </p>
+                <p className='text-xl text-white'>Education: </p>
+                <p className='text-xl text-white'>Institution: {user?.user?.institute} </p>
+                <p className='text-xl text-white'>Mobile: {user?.user?.mobile} </p>
+                <p className='text-xl text-white'>Address: {user?.user?.address} </p>
+                <p className='text-xl text-white'>Linkedin: </p>
+                <p className='text-xl text-white'>Facebook: </p>
+                <div className="card-actions justify-center py-10">
+                    <button onClick={() => navigate(`/dashboard/myprofile/updateprofile`)} className="btn btn-secondary text-center">Update Profile</button>
+                </div>
+                <p>
+                </p>
             </div>
         </div>
     );
