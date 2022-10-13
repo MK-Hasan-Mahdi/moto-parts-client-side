@@ -12,7 +12,7 @@ const Products = () => {
 
     return (
 
-        <div className='bg-blue-500'>
+        <div className=''>
             <div className='mid-container my-28 lg:px-40 '>
                 <div className='text-center'>
 
